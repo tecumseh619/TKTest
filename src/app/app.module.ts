@@ -3,13 +3,18 @@ import { ErrorHandler, NgModule } from '@angular/core';
 import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { StatusBar } from '@ionic-native/status-bar';
-import { LobbyPage } from '../pages/lobby/lobby'
+import { LobbyPage } from '../pages/lobby/lobby';
 import { MyApp } from './app.component';
-
+import { QuestionPage } from '../pages/question/question'; 
+import { HistoryPage } from '../pages/history/history'; 
+import { ResultsPage } from '../pages/results/results';
 
 let injections: any[]=[
   MyApp,
-  LobbyPage
+  LobbyPage,
+  QuestionPage,
+  HistoryPage,
+  ResultsPage
   ]
 
 @NgModule({
