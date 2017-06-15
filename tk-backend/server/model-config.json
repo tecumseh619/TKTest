@@ -38,5 +38,13 @@
   "Questions": {
     "dataSource": "mongo",
     "public": true
+  },
+  "TestResults": {
+    "dataSource": "mongo",
+    "public": true
+  },
+  "AppUsers": {
+    "dataSource": "mongo",
+    "public": true
   }
 }
