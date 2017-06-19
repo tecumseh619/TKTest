@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { Http } from '@angular/http';
 import 'rxjs/add/operator/map';
 
+
 /*
   Generated class for the AppUserProvider provider.
 
@@ -29,6 +30,13 @@ export class AppUserProvider {
     return this.http.post(
       this.baseUrl + this.path + "/login",
       storedUserData
+      );
+  }
+  
+  logout(token){
+    return this.http.post(
+      this.baseUrl + this.path + '/logout' + '?access_token=' + token,
+      {}
       );
   }
 
