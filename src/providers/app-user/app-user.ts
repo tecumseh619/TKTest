@@ -15,14 +15,21 @@ export class AppUserProvider {
     console.log('Hello AppUserProvider Provider');
   }
   
-  baseUrl: string = "https://dillionssf-phortonssf.c9users.io/api/AppUsers?access_token=iAODHktLsBjpuGIWcRbVTWzj6wZxEobMbTisCNrU1nNPR1gMAR4fVCefDspWINyd"
-  path: string = "/AppUserProvider"
+  baseUrl: string = "https://dillionssf-phortonssf.c9users.io/api"
+  path: string = "/AppUsers"
   
   register(newUserData) {
     return this.http.post(
       this.baseUrl + this.path,
       newUserData
     );
+  }
+  
+  login(storedUserData){
+    return this.http.post(
+      this.baseUrl + this.path + "/login",
+      storedUserData
+      );
   }
 
 }

@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { AppUserProvider } from '../../providers/app-user/app-user';
+import { LobbyPage } from '../lobby/lobby'
 
 /**
  * Generated class for the LoginPage page.
@@ -13,12 +15,31 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
   templateUrl: 'login.html',
 })
 export class LoginPage {
+user: any = {};
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  constructor(
+    public navCtrl: NavController, 
+    public navParams: NavParams,
+    public appUsers: AppUserProvider) {
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad LoginPage');
   }
-
+  
+  loginForm(form) {
+    console.log(form);
+    if(form.invalid) {
+      return alert("Please fill out all of the required fields.");
+    }
+     this.appUsers.login(this.user)
+      .map(res => res.json())
+      .subscribe(res => {
+        window.localStorage.setItem('token', res.id);
+        window.localStorage.setItem('userId', res.userId);
+        this.navCtrl.setRoot(LobbyPage);
+      }, error => {
+        alert("Uh oh " + error + ". :(")
+      }); 
+  }
 }
