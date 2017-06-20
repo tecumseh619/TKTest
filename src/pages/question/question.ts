@@ -2,7 +2,7 @@ import { Component, ViewChild } from '@angular/core';
 import { IonicPage, NavController, NavParams, Slides } from 'ionic-angular';
 import { LobbyPage } from '../lobby/lobby';
 import { ResultsPage } from '../results/results';
-
+import { QuestionsProvider } from '../../providers/questions/questions';
 
 /**
  * Generated class for the QuestionPage page.
@@ -384,14 +384,27 @@ export class QuestionPage {
   @ViewChild(Slides) slides: Slides;
   questions: any = [];
   testAnswers: any = {};
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
 
-    for (let singleQuestion of apiQuestions){
-      if(!this.questions[singleQuestion.Question_Number - 1]){
-        this.questions[singleQuestion.Question_Number - 1] = {};
-      }
-        this.questions[singleQuestion.Question_Number - 1][singleQuestion.Answer_ID] = singleQuestion;
-    }
+  constructor(
+    public navCtrl: NavController, 
+    public navParams: NavParams,
+    public questionsProv: QuestionsProvider
+    ) {
+    questionsProv.getQuestionsProvider(window.localStorage.getItem("token"))
+    .map(res => res.json())
+    .subscribe(res => {
+        apiQuestions = res;
+        for (let singleQuestion of apiQuestions) {
+            if(!this.questions[singleQuestion.Question_Number - 1]){
+                this.questions[singleQuestion.Question_Number - 1] = {};
+                {
+                this.questions[singleQuestion.Question_Number - 1][singleQuestion.Answer_ID] = singleQuestion;
+                }
+            }
+        }
+    }, error => {
+        alert("Warning! Something's not  right!");
+    });
   }
 
   ionViewDidLoad() {
