@@ -16,7 +16,7 @@ export class AppUserProvider {
     console.log('Hello AppUserProvider Provider');
   }
   
-  baseUrl: string = "https://dillionssf-phortonssf.c9users.io/api"
+  baseUrl: string = "https://dillionssf-phortonssf.c9users.io:8080/api"
   path: string = "/AppUsers"
   
   register(newUserData) {

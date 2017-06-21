@@ -3,6 +3,7 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { QuestionPage } from '../question/question'; 
 import { HistoryPage } from '../history/history'; 
 import { LandingPage } from '../landing/landing';
+import { AppUserProvider } from '../../providers/app-user/app-user';
 
 /**
  * Generated class for the LobbyPage page.
@@ -17,17 +18,17 @@ import { LandingPage } from '../landing/landing';
 })
 export class LobbyPage {
   
-  showLogout: boolean = false; 
+  // showLogout: boolean = false; 
         
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  constructor(
+    public navCtrl: NavController, 
+    public navParams: NavParams,
+    public appUsers: AppUserProvider) {
   }
 
-    logout(){
-      this.navCtrl.setRoot(LandingPage);
-    };
     
   ionViewDidLoad() {
-    this.showLogout = this.navParams.get("showLogout");
+    // this.showLogout = this.navParams.get("showLogout");
     console.log('ionViewDidLoad LobbyPage');
   }
   
@@ -38,5 +39,15 @@ export class LobbyPage {
   lookHistory(){
     this.navCtrl.push(HistoryPage);
     }
-}
 
+  logout(){
+      this.appUsers.logout(window.localStorage.getItem("token"))
+      .map(res => res.json())
+      .subscribe(res => {
+        this.navCtrl.setRoot(LandingPage);
+      }, error => {
+        alert("Uh oh " + error + ". :(")
+      }); 
+  }
+}
+  

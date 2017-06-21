@@ -14,5 +14,12 @@ export class TestResultsProvider {
   constructor(public http: Http) {
     console.log('Hello TestResultsProvider Provider');
   }
+  
+    // postRequest(token){
+    // return this.http.post(
+    //   this.baseUrl + this.path + '/logout' + '?access_token=' + token,
+    //   {}
+    //   );
+  // }
 
 }

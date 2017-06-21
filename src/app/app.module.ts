@@ -1,18 +1,22 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { ErrorHandler, NgModule } from '@angular/core';
-import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { StatusBar } from '@ionic-native/status-bar';
-import { LobbyPage } from '../pages/lobby/lobby';
+import { HttpModule } from '@angular/http';
 import { MyApp } from './app.component';
+import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
+
+import { LobbyPage } from '../pages/lobby/lobby';
 import { QuestionPage } from '../pages/question/question'; 
 import { HistoryPage } from '../pages/history/history'; 
 import { ResultsPage } from '../pages/results/results';
-import { AppUserProvider } from '../providers/app-user/app-user';
 import { LandingPage } from '../pages/landing/landing';
 import { LoginPage } from '../pages/login/login';
 import { RegisterPage } from '../pages/register/register';
-import { HttpModule } from '@angular/http';
+
+import { AppUserProvider } from '../providers/app-user/app-user';
+import { QuestionsProvider } from '../providers/questions/questions';
+import { TestResultsProvider } from '../providers/test-results/test-results';
 
 let injections: any[]=[
   MyApp,
@@ -38,7 +42,9 @@ let injections: any[]=[
     StatusBar,
     SplashScreen,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
-    AppUserProvider
+    AppUserProvider,
+    QuestionsProvider,
+    TestResultsProvider
   ]
 })
 export class AppModule {}
